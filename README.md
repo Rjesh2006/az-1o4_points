@@ -193,4 +193,20 @@ https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/
 
 ---
 
+## Recovery Services Vault: Control Plane for Backup
+
+- Acts as a **secure interface** for backup and disaster recovery.
+- Stores **metadata**: retention, policies, access control, encryption settings.
+- Does **not expose raw data** like a storage account.
+- Delegates actual storage to Azure Backup infrastructure.
+
+### Vault Responsibilities
+- Define what to back up
+- Set how long to retain
+- Control who can access/restore
+- Apply encryption and redundancy (LRS/GRS/ZRS)
+
+✅ Think of it as a **policy-driven gatekeeper**  
+❌ Not a general-purpose data container
+
 This structured markdown document aligns with how you’ve been storing points — grouping them logically and assigning sub-points where needed. Let me know if this is ready to be saved as a file for you!
