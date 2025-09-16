@@ -2,6 +2,8 @@
 
 ## 🟠 Azure Storage Concepts
 
+https://share.google/BUANPFLQwlDgKwAPZ
+
 ### ✅ Azure Blob Storage
 1. Azure Blob Storage is a service that stores unstructured data in the cloud as objects or blobs. Blob stands for Binary Large Object. Blob Storage is also referred to as object storage or container storage.
 2. Azure Blob Storage uses a container resource to group a set of blobs. A blob can't exist by itself in Blob Storage. A blob must be stored in a container resource.
