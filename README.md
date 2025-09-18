@@ -211,4 +211,96 @@ https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/
 ✅ Think of it as a **policy-driven gatekeeper**  
 ❌ Not a general-purpose data container
 
+## ✅ Azure Backup, Storage & Monitoring (Points 73 → End)
+
+### **73. SQL Server & SAP HANA Workload-Aware Backups**
+- Stream-based specialized backup solutions for SQL Server and SAP HANA in Azure VMs.
+- Support full, differential, and log backups.
+- Provide 15-minute RPO and point-in-time recovery.
+
+### **74. Recovery Services Vault (RSV) – Secure Control Plane**
+- Stores backup configuration metadata (what, how often, retention, security, access).
+- Does not expose raw data directly like a storage account.
+- Acts as the policy & access controller for Azure Backup and Site Recovery.
+
+### **75. VSS Snapshot Workflow (for Application-Consistent Backups)**
+- Backup requestor (Azure Backup/agent) asks VSS for snapshot.
+- VSS coordinates with app writers (SQL, AD, IIS, etc.) → flush in-memory data.
+- Snapshot (shadow copy) created.
+- Writers resume operations.
+- Snapshot moved to vault with retention + encryption policies.
+- ✅ Ensures clean, application-consistent backups.
+
+### **76. Snapshot Tier (Instant Restore)**
+- Snapshots stored locally up to 5 days.
+- Best for fast operational recovery.
+- Supports instant restore directly from snapshots.
+
+### **77. Vault Tier**
+- Snapshots copied to the vault for long-term retention and security.
+- Recovery point type changes to “snapshot + vault”.
+
+### **78. Restore Options**
+- Restore from Snapshot Tier → faster, best for operational recovery.
+- Restore from Vault Tier → for older recovery points, longer retention.
+
+### **79. Cross-Subscription Restore (CSR)**
+- Restore VMs/disks to a different subscription within same tenant.
+- Requires CSR property enabled in RSV.
+- Works with Cross Region Restore (CRR) and Cross Zonal Restore (CZR).
+- Only supported for managed VMs with MSI (Managed System Identity).
+- ❌ Not supported for snapshots, unmanaged VMs, or ADE-encrypted VMs.
+
+### **80. Azure Ultra Disks**
+- Deliver high throughput, high IOPS, and consistent low latency.
+- Support dynamic performance scaling without VM restart.
+- Ideal for mission-critical workloads like databases.
+
+### **81. Zone-Redundant Storage (ZRS)**
+- Data replicated synchronously across 3 availability zones in the same region.
+- Protects against zone-level failures.
+- Keeps data accessible even if one AZ is unavailable.
+
+### **82. Disk Bursting**
+- Allows VMs/disks to temporarily exceed baseline performance.
+- Useful for traffic spikes, batch jobs, or fast boot scenarios.
+
+### **83. VM Disk Resize (Data Safety)**
+- You can increase VM disk size while VM is running.
+- Must ensure data consistency → resizing doesn’t delete data, but the OS must detect new capacity.
+- OS won’t use the new space until you extend the partition inside VM.
+
+### **84. Custom Data Collection Rules (DCRs)**
+- Define what monitoring data to collect and where to send it.
+- Collect metrics, performance counters, event logs.
+- Send data to Azure Monitor Logs or Azure Monitor Metrics.
+
+### **85. Activity Logs (Default in Azure Monitor)**
+- Automatically record VM lifecycle events (startup, modifications).
+- Can be sent to:
+  - Azure Monitor Logs → querying, alerting (retention up to 2 years).
+  - Azure Storage → cheap long-term archiving.
+  - Azure Event Hubs → stream logs outside Azure.
+
+### **86. VM Client/Guest Monitoring**
+- Monitors inside the VM: OS, workloads, apps.
+- Requires Azure Monitor Agent (AMA) + configured DCRs.
+
+### **87. DCR Storage Logic**
+- Azure Monitor Metrics → can store only metrics.
+- Azure Monitor Logs → can store metrics + event logs.
+- More flexible for querying and alerting.
+
+### **88. Client Event Log Data Collection**
+- VM Insights creates a default DCR for performance counters.
+- For event logs, you must create a custom DCR.
+- Data stored in Log Analytics Workspace, accessible with Kusto Query Language (KQL).
+
+### **89. Guest/Client Monitoring Purpose**
+- Goes beyond VM host monitoring.
+- Ensures software, processes, and workloads running inside VM are healthy.
+
+### **90. VM Guest/Client Monitoring (Continued)**
+- Besides monitoring your VM host's health, utilization, and performance, you need to monitor the software and processes running on your VM. These are called the VM guest or client.
+
 This structured markdown document aligns with how you’ve been storing points — grouping them logically and assigning sub-points where needed. Let me know if this is ready to be saved as a file for you!
