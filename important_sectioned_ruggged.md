@@ -1,3 +1,13 @@
+# 🔐 Azure Endpoint Strategy: Private Endpoint & Private Link
+
+## 📘 Overview
+
+When working within a **private VNet**, and your resources (VMs, apps, containers) need to securely access Azure services (e.g., SQL, Storage, Key Vault), you should use:
+
+- **Private Endpoint**: A private IP in your VNet that connects to the Azure service.
+- **Azure Private Link**: The underlying technology that enables this secure connection over Microsoft’s backbone.
+
+---
 
 ---
 
